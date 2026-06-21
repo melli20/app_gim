@@ -1,4 +1,5 @@
 import AVKit
+import SwiftData
 import SwiftUI
 import UIKit
 
@@ -7,6 +8,7 @@ struct ExerciseDetailView: View {
 
     @Environment(\.openURL) private var openURL
     @State private var isShowingEditor = false
+    @State private var isShowingPlanPicker = false
     @State private var localVideoURL: URL?
     @State private var isAccessingLocalVideo = false
 
@@ -82,11 +84,10 @@ struct ExerciseDetailView: View {
                 }
 
                 Button {
-                    // La acción real se conectará con la tabla semanal en la Fase 4.
+                    isShowingPlanPicker = true
                 } label: {
                     Label("Añadir a tabla semanal", systemImage: "calendar.badge.plus")
                 }
-                .disabled(true)
             }
         }
         .navigationTitle(exercise.name)
@@ -103,6 +104,11 @@ struct ExerciseDetailView: View {
         .sheet(isPresented: $isShowingEditor) {
             NavigationStack {
                 ExerciseEditorView(exercise: exercise)
+            }
+        }
+        .sheet(isPresented: $isShowingPlanPicker) {
+            NavigationStack {
+                AddExerciseToWeeklyPlanView(exercise: exercise)
             }
         }
         .onAppear(perform: resolveLocalVideoIfNeeded)
@@ -142,6 +148,70 @@ struct ExerciseDetailView: View {
         guard isAccessingLocalVideo else { return }
         localVideoURL?.stopAccessingSecurityScopedResource()
         isAccessingLocalVideo = false
+    }
+}
+
+private struct AddExerciseToWeeklyPlanView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \WeeklyPlan.startDate, order: .reverse) private var plans: [WeeklyPlan]
+
+    let exercise: Exercise
+
+    var body: some View {
+        List {
+            if plans.isEmpty {
+                ContentUnavailableView(
+                    "Sin tablas semanales",
+                    systemImage: "calendar",
+                    description: Text("Crea una tabla semanal manual antes de añadir ejercicios desde el detalle.")
+                )
+            } else {
+                ForEach(plans) { plan in
+                    Section(plan.title) {
+                        ForEach(plan.days.sorted { $0.weekdayRawValue < $1.weekdayRawValue }) { day in
+                            Button {
+                                addExercise(to: day)
+                            } label: {
+                                HStack {
+                                    Text(day.weekday.title)
+                                    Spacer()
+                                    Text("\(day.plannedExercises.count)")
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle("Añadir a semana")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancelar") {
+                    dismiss()
+                }
+            }
+        }
+    }
+
+    private func addExercise(to day: WeeklyPlanDay) {
+        let nextSortOrder = (day.plannedExercises.map(\.sortOrder).max() ?? -1) + 1
+        let plannedExercise = PlannedExercise(
+            exercise: exercise,
+            customSets: exercise.sets,
+            customRepetitions: exercise.repetitions,
+            customTargetTime: exercise.targetTime,
+            customRestTime: exercise.restTime,
+            sortOrder: nextSortOrder
+        )
+
+        modelContext.insert(plannedExercise)
+        day.plannedExercises.append(plannedExercise)
+        try? modelContext.save()
+        dismiss()
     }
 }
 

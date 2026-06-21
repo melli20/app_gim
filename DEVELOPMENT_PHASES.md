@@ -31,7 +31,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 4 - Tabla semanal manual
 
-Pendiente.
+Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
 
 - Crear tabla semanal.
 - Añadir ejercicios a cada día.
