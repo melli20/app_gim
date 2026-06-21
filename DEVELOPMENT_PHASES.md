@@ -13,7 +13,7 @@ Estado: implementada en código. Pendiente de compilación real en un entorno co
 
 ## Fase 2 - CRUD completo de ejercicios
 
-Pendiente.
+Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
 
 - Listado real con SwiftData.
 - Crear, editar y eliminar ejercicios.

@@ -14,6 +14,7 @@ final class Exercise {
     var videoSourceRawValue: String
     var externalVideoURL: String?
     var localVideoBookmark: Data?
+    var localVideoFilename: String?
     var imageData: Data?
     var sets: Int
     var repetitions: Int
@@ -52,6 +53,7 @@ final class Exercise {
         videoSource: VideoSourceType = .none,
         externalVideoURL: String? = nil,
         localVideoBookmark: Data? = nil,
+        localVideoFilename: String? = nil,
         imageData: Data? = nil,
         sets: Int,
         repetitions: Int,
@@ -74,6 +76,7 @@ final class Exercise {
         self.videoSourceRawValue = videoSource.rawValue
         self.externalVideoURL = externalVideoURL
         self.localVideoBookmark = localVideoBookmark
+        self.localVideoFilename = localVideoFilename
         self.imageData = imageData
         self.sets = sets
         self.repetitions = repetitions
