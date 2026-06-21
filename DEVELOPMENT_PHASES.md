@@ -48,7 +48,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 6 - Historial y duplicado
 
-Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
+Estado: completada y compilando correctamente en GitHub Actions.
 
 - Historial de tablas semanales.
 - Duplicar semanas anteriores.
