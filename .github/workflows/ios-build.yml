@@ -1,0 +1,33 @@
+name: iOS build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.4.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build Training Planner
+        run: |
+          xcodebuild \
+            -project TrainingPlanner.xcodeproj \
+            -scheme TrainingPlanner \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
