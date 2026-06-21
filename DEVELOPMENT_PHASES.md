@@ -40,7 +40,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 5 - Generador automático
 
-Pendiente.
+Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
 
 - Selección por objetivo, nivel, días disponibles y duración.
 - Priorización por categorías o grupos musculares.
