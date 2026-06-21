@@ -22,7 +22,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 3 - Detalle de ejercicio
 
-Pendiente.
+Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
 
 - Vídeo externo o local.
 - Imagen opcional.
