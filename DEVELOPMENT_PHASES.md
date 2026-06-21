@@ -56,7 +56,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 7 - Pulido y preparación futura
 
-Pendiente.
+Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
 
 - Mejoras visuales.
 - Revisión de usabilidad.
