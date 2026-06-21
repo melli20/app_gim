@@ -229,7 +229,7 @@ struct ExerciseEditorView: View {
     private func handleVideoImport(_ result: Result<URL, Error>) {
         guard case let .success(url) = result else { return }
         localVideoFilename = url.lastPathComponent
-        localVideoBookmark = try? url.bookmarkData(options: [.withSecurityScope], includingResourceValuesForKeys: nil, relativeTo: nil)
+        localVideoBookmark = try? url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil)
     }
 
     private func loadImage(from item: PhotosPickerItem?) {

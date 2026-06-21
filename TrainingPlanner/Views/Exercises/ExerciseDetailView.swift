@@ -128,14 +128,13 @@ struct ExerciseDetailView: View {
         var isStale = false
         guard let url = try? URL(
             resolvingBookmarkData: bookmarkData,
-            options: [.withSecurityScope],
+            options: [],
             relativeTo: nil,
             bookmarkDataIsStale: &isStale
         ) else {
             return
         }
 
-        isAccessingLocalVideo = url.startAccessingSecurityScopedResource()
         localVideoURL = url
     }
 
