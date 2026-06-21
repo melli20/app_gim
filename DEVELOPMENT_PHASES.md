@@ -2,7 +2,7 @@
 
 ## Fase 1 - Proyecto, modelos y navegación básica
 
-Estado: implementada en código. Pendiente de compilación real en un entorno con Xcode disponible. Se ha añadido un workflow de GitHub Actions para compilar en macOS al subir el proyecto a GitHub.
+Estado: completada y compilando correctamente en GitHub Actions. Se ha añadido un workflow de GitHub Actions para compilar en macOS al subir el proyecto a GitHub.
 
 - Proyecto SwiftUI nativo para iPhone.
 - SwiftData configurado en la entrada de la app.
@@ -22,7 +22,7 @@ Estado: completada y compilando correctamente en GitHub Actions.
 
 ## Fase 3 - Detalle de ejercicio
 
-Estado: implementada en código. Pendiente de compilación real en GitHub Actions.
+Estado: completada y compilando correctamente en GitHub Actions.
 
 - Vídeo externo o local.
 - Imagen opcional.
